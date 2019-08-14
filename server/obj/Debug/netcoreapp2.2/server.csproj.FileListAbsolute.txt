@@ -1,0 +1,14 @@
+C:\Code\InventoryTracker\server\bin\Debug\netcoreapp2.2\server.deps.json
+C:\Code\InventoryTracker\server\bin\Debug\netcoreapp2.2\server.runtimeconfig.json
+C:\Code\InventoryTracker\server\bin\Debug\netcoreapp2.2\server.runtimeconfig.dev.json
+C:\Code\InventoryTracker\server\bin\Debug\netcoreapp2.2\server.dll
+C:\Code\InventoryTracker\server\bin\Debug\netcoreapp2.2\server.pdb
+C:\Code\InventoryTracker\server\obj\Debug\netcoreapp2.2\server.csprojAssemblyReference.cache
+C:\Code\InventoryTracker\server\obj\Debug\netcoreapp2.2\server.csproj.CoreCompileInputs.cache
+C:\Code\InventoryTracker\server\obj\Debug\netcoreapp2.2\server.RazorAssemblyInfo.cache
+C:\Code\InventoryTracker\server\obj\Debug\netcoreapp2.2\server.RazorAssemblyInfo.cs
+C:\Code\InventoryTracker\server\obj\Debug\netcoreapp2.2\server.AssemblyInfoInputs.cache
+C:\Code\InventoryTracker\server\obj\Debug\netcoreapp2.2\server.AssemblyInfo.cs
+C:\Code\InventoryTracker\server\obj\Debug\netcoreapp2.2\server.RazorTargetAssemblyInfo.cache
+C:\Code\InventoryTracker\server\obj\Debug\netcoreapp2.2\server.dll
+C:\Code\InventoryTracker\server\obj\Debug\netcoreapp2.2\server.pdb
