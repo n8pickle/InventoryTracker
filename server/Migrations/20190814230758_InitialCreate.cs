@@ -9,7 +9,7 @@ namespace server.Migrations
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.CreateTable(
-                name: "Inventories",
+                name: "Inventory",
                 columns: table => new
                 {
                     InventoryID = table.Column<int>(nullable: false)
@@ -21,11 +21,11 @@ namespace server.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Inventories", x => x.InventoryID);
+                    table.PrimaryKey("PK_Inventory", x => x.InventoryID);
                 });
 
             migrationBuilder.CreateTable(
-                name: "Products",
+                name: "Product",
                 columns: table => new
                 {
                     ProductID = table.Column<int>(nullable: false)
@@ -42,17 +42,17 @@ namespace server.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Products", x => x.ProductID);
+                    table.PrimaryKey("PK_Product", x => x.ProductID);
                 });
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "Inventories");
+                name: "Inventory");
 
             migrationBuilder.DropTable(
-                name: "Products");
+                name: "Product");
         }
     }
 }

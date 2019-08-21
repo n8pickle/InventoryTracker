@@ -32,7 +32,7 @@ namespace server.Migrations
 
                     b.HasKey("InventoryID");
 
-                    b.ToTable("Inventories");
+                    b.ToTable("Inventory");
                 });
 
             modelBuilder.Entity("server.Models.Domain.Product", b =>
@@ -60,7 +60,7 @@ namespace server.Migrations
 
                     b.HasKey("ProductID");
 
-                    b.ToTable("Products");
+                    b.ToTable("Product");
                 });
 #pragma warning restore 612, 618
         }

@@ -9,7 +9,7 @@ using server.Models.Database;
 namespace server.Migrations
 {
     [DbContext(typeof(MySqlDbContext))]
-    [Migration("20190814230005_InitialCreate")]
+    [Migration("20190814230758_InitialCreate")]
     partial class InitialCreate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -34,7 +34,7 @@ namespace server.Migrations
 
                     b.HasKey("InventoryID");
 
-                    b.ToTable("Inventories");
+                    b.ToTable("Inventory");
                 });
 
             modelBuilder.Entity("server.Models.Domain.Product", b =>
@@ -62,7 +62,7 @@ namespace server.Migrations
 
                     b.HasKey("ProductID");
 
-                    b.ToTable("Products");
+                    b.ToTable("Product");
                 });
 #pragma warning restore 612, 618
         }

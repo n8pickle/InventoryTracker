@@ -9,6 +9,8 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using server.Models.Database;
+using server.Repositories;
+using server.Services;
 
 namespace server
 {
@@ -37,6 +39,11 @@ namespace server
                     .AllowCredentials();
                 });
             });
+
+            services.AddTransient<IProductsRepository, ProductsRepository>();
+            services.AddTransient<IProductsService, ProductsService>();
+            services.AddTransient<IInventoryRepository, InventoryRepository>();
+            services.AddTransient<IInventoryService, InventoryService>();
 
             services.AddMvc();
         }

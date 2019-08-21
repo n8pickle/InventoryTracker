@@ -10,7 +10,7 @@ namespace server.Models.Database
             Database.EnsureCreated();
         }
 
-        public DbSet<Product> Products { get; set; }
-        public DbSet<Inventory> Inventories { get; set; }
+        public DbSet<Product> Product { get; set; }
+        public DbSet<Inventory> Inventory { get; set; }
     }
 }
