@@ -17,7 +17,7 @@ namespace server.Repositories
         public async Task CreateProduct(Product product)
         {
             await _mySqlDbContext.Product.AddAsync(product);
-            _mySqlDbContext.SaveChanges();
+            await _mySqlDbContext.SaveChangesAsync();
         }
 
         public async Task<Product> GetProduct(int SKU)
@@ -34,7 +34,7 @@ namespace server.Repositories
         {
             var result = await _mySqlDbContext.Product.Where(p => p.SKU == SKU && p.Deleted != 1).FirstOrDefaultAsync();
             result.Deleted = 1;
-            _mySqlDbContext.SaveChanges();
+            await _mySqlDbContext.SaveChangesAsync();
         }
 
         public async Task UpdateProduct(int SKU, Product product)
@@ -49,7 +49,7 @@ namespace server.Repositories
             result.TrimColor = product.TrimColor;
             result.Color = product.Color;
             result.Dimensions = product.Dimensions;
-            _mySqlDbContext.SaveChanges();
+            await _mySqlDbContext.SaveChangesAsync();
         }
     }
 }

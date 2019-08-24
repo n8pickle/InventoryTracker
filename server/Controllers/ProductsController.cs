@@ -1,6 +1,7 @@
 using System;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
+using server.Models;
 using server.Models.Domain;
 using server.Services;
 
@@ -17,7 +18,7 @@ namespace server.controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> CreateProduct([FromBody]Product product)
+        public async Task<IActionResult> CreateProduct([FromBody]ProductTO product)
         {
             try
             {
@@ -59,7 +60,7 @@ namespace server.controllers
 
         [HttpPut]
         [Route("{SKU}")]
-        public async Task<IActionResult> UpdateProduct(int SKU, [FromBody]Product product)
+        public async Task<IActionResult> UpdateProduct(int SKU, [FromBody]ProductTO product)
         {
             try
             {

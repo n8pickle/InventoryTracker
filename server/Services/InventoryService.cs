@@ -1,5 +1,6 @@
 using System;
 using System.Threading.Tasks;
+using server.Models.Domain;
 using server.Repositories;
 
 namespace server.Services
@@ -12,6 +13,12 @@ namespace server.Services
             _iInventoryRepository = iInventoryRepository;
         }
 
+        public async Task CreateInventory(Inventory inventory)
+        {
+            inventory.DateLastUpdated = DateTime.Now;
+            await _iInventoryRepository.CreateInventory(inventory);
+        }
+
         public async Task AddQuantity(int productId, int amount)
         {
             await _iInventoryRepository.AddQuantity(productId, amount);
@@ -20,6 +27,11 @@ namespace server.Services
         public async Task<DateTime> GetDateLastUpdated(int productId)
         {
             return await _iInventoryRepository.GetDateLastUpdated(productId);
+        }
+
+        public async Task SetQuantity(int productId, int amount)
+        {
+            await _iInventoryRepository.SetQuantity(productId, amount);
         }
 
         public async Task<int> GetQuantity(int productId)
