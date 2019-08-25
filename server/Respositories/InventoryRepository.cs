@@ -19,35 +19,35 @@ namespace server.Repositories
             await _mySqlDbContext.Inventory.AddAsync(inventory);
             await _mySqlDbContext.SaveChangesAsync();
         }
-        public async Task AddQuantity(int productId, int amount)
+        public async Task AddQuantity(int inventoryId, int amount)
         {
-            var result = await _mySqlDbContext.Inventory.Where(p => p.ProductID == productId).FirstOrDefaultAsync();
+            var result = await _mySqlDbContext.Inventory.Where(p => p.InventoryID == inventoryId).FirstOrDefaultAsync();
             result.Quantity += amount;
             await _mySqlDbContext.SaveChangesAsync();
         }
 
-        public async Task<DateTime> GetDateLastUpdated(int productId)
+        public async Task<DateTime> GetDateLastUpdated(int inventoryId)
         {
-            var result = await _mySqlDbContext.Inventory.Where(p => p.ProductID == productId).FirstOrDefaultAsync();
+            var result = await _mySqlDbContext.Inventory.Where(p => p.InventoryID == inventoryId).FirstOrDefaultAsync();
             return result.DateLastUpdated;
         }
 
-        public async Task SetQuantity(int productId, int amount)
+        public async Task SetQuantity(int inventoryId, int amount)
         {
-            var result = await _mySqlDbContext.Inventory.Where(p => p.ProductID == productId).FirstOrDefaultAsync();
+            var result = await _mySqlDbContext.Inventory.Where(p => p.InventoryID == inventoryId).FirstOrDefaultAsync();
             result.Quantity = amount;
             await _mySqlDbContext.SaveChangesAsync();
         }
 
-        public async Task<int> GetQuantity(int productId)
+        public async Task<int> GetQuantity(int inventoryId)
         {
-            var result = await _mySqlDbContext.Inventory.Where(p => p.ProductID == productId).FirstOrDefaultAsync();
+            var result = await _mySqlDbContext.Inventory.Where(p => p.InventoryID == inventoryId).FirstOrDefaultAsync();
             return result.Quantity;
         }
 
-        public async Task SubtractQuantity(int productId, int amount)
+        public async Task SubtractQuantity(int inventoryId, int amount)
         {
-            var result = await _mySqlDbContext.Inventory.Where(p => p.ProductID == productId).FirstOrDefaultAsync();
+            var result = await _mySqlDbContext.Inventory.Where(p => p.InventoryID == inventoryId).FirstOrDefaultAsync();
             result.Quantity -= amount;
             await _mySqlDbContext.SaveChangesAsync();
         }

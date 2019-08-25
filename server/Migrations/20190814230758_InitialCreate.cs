@@ -16,7 +16,7 @@ namespace server.Migrations
                         .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
                     Quantity = table.Column<int>(nullable: false),
                     DateLastUpdated = table.Column<DateTime>(nullable: false),
-                    ProductID = table.Column<int>(nullable: false),
+                    inventoryID = table.Column<int>(nullable: false),
                     Deleted = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
@@ -25,12 +25,12 @@ namespace server.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Product",
+                name: "inventory",
                 columns: table => new
                 {
-                    ProductID = table.Column<int>(nullable: false)
+                    inventoryID = table.Column<int>(nullable: false)
                         .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
-                    ProductName = table.Column<string>(nullable: true),
+                    inventoryName = table.Column<string>(nullable: true),
                     NotificationQuantity = table.Column<int>(nullable: false),
                     Color = table.Column<string>(nullable: true),
                     TrimColor = table.Column<string>(nullable: true),
@@ -42,7 +42,7 @@ namespace server.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Product", x => x.ProductID);
+                    table.PrimaryKey("PK_inventory", x => x.inventoryID);
                 });
         }
 
@@ -52,7 +52,7 @@ namespace server.Migrations
                 name: "Inventory");
 
             migrationBuilder.DropTable(
-                name: "Product");
+                name: "inventory");
         }
     }
 }

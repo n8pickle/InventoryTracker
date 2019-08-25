@@ -19,29 +19,29 @@ namespace server.Services
             await _iInventoryRepository.CreateInventory(inventory);
         }
 
-        public async Task AddQuantity(int productId, int amount)
+        public async Task AddQuantity(int inventoryId, int amount)
         {
-            await _iInventoryRepository.AddQuantity(productId, amount);
+            await _iInventoryRepository.AddQuantity(inventoryId, amount);
         }
 
-        public async Task<DateTime> GetDateLastUpdated(int productId)
+        public async Task<DateTime> GetDateLastUpdated(int inventoryId)
         {
-            return await _iInventoryRepository.GetDateLastUpdated(productId);
+            return await _iInventoryRepository.GetDateLastUpdated(inventoryId);
         }
 
-        public async Task SetQuantity(int productId, int amount)
+        public async Task SetQuantity(int inventoryId, int amount)
         {
-            await _iInventoryRepository.SetQuantity(productId, amount);
+            await _iInventoryRepository.SetQuantity(inventoryId, amount);
         }
 
-        public async Task<int> GetQuantity(int productId)
+        public async Task<int> GetQuantity(int inventoryId)
         {
-            return await _iInventoryRepository.GetQuantity(productId);
+            return await _iInventoryRepository.GetQuantity(inventoryId);
         }
 
-        public async Task SubtractQuantity(int productId, int amount)
+        public async Task SubtractQuantity(int inventoryId, int amount)
         {
-            await _iInventoryRepository.SubtractQuantity(productId, amount);
+            await _iInventoryRepository.SubtractQuantity(inventoryId, amount);
         }
     }
 }
