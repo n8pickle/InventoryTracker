@@ -4,7 +4,15 @@ namespace server.Models.Domain
 {
     public class Inventory
     {
+        private InventoryTO inventory;
+
         public Inventory() { }
+
+        public Inventory(InventoryTO inventory)
+        {
+            this.inventory = inventory;
+        }
+
         public Inventory(int quantity, DateTime dateLastUpdated)
         {
             this.Quantity = quantity;

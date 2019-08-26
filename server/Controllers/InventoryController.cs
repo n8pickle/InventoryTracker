@@ -16,7 +16,7 @@ namespace server.controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> CreateInventory([FromBody]Inventory inventory)
+        public async Task<IActionResult> CreateInventory([FromBody]InventoryTO inventory)
         {
             try
             {
@@ -31,11 +31,11 @@ namespace server.controllers
 
         [HttpPost]
         [Route("{inventoryId}")]
-        public async Task<IActionResult> AddQuantity(int inventoryId, [FromBody]int amount)
+        public async Task<IActionResult> AddQuantity([FromBody]int SKU, int inventoryId, [FromBody]int amount)
         {
             try
             {
-                await _inventoryService.AddQuantity(inventoryId, amount);
+                await _inventoryService.AddQuantity(SKU, inventoryId, amount);
                 return Ok();
             }
             catch (Exception e)
@@ -60,11 +60,11 @@ namespace server.controllers
 
         [HttpPost]
         [Route("{inventoryId}")]
-        public async Task<IActionResult> SetQuantity(int inventoryId, [FromBody]int amount)
+        public async Task<IActionResult> SetQuantity([FromBody]int SKU, int inventoryId, [FromBody]int amount)
         {
             try
             {
-                await _inventoryService.SetQuantity(inventoryId, amount);
+                await _inventoryService.SetQuantity(SKU, inventoryId, amount);
                 return Ok();
             }
             catch (Exception e)
@@ -74,11 +74,11 @@ namespace server.controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> GetQuantity(int inventoryId)
+        public async Task<IActionResult> GetQuantity([FromBody]int SKU, int inventoryId)
         {
             try
             {
-                return Ok(await _inventoryService.GetQuantity(inventoryId));
+                return Ok(await _inventoryService.GetQuantity(SKU, inventoryId));
             }
             catch (Exception e)
             {
@@ -87,12 +87,12 @@ namespace server.controllers
         }
 
         [HttpPost]
-        [Route("{inventoryId")]
-        public async Task<IActionResult> SubtractQuantity(int inventoryId, [FromBody]int amount)
+        [Route("{inventoryId}")]
+        public async Task<IActionResult> SubtractQuantity([FromBody]int SKU, int inventoryId, [FromBody]int amount)
         {
             try
             {
-                await _inventoryService.SubtractQuantity(inventoryId, amount);
+                await _inventoryService.SubtractQuantity(SKU, inventoryId, amount);
                 return Ok();
             }
             catch (Exception e)

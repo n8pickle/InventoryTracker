@@ -7,10 +7,10 @@ namespace server.Repositories
     public interface IInventoryRepository
     {
         Task CreateInventory(Inventory inventory);
-        Task<int> GetQuantity(int inventoryId);
+        Task<int> GetQuantity(int SKU, int inventoryId);
         Task<DateTime> GetDateLastUpdated(int inventoryId);
-        Task SetQuantity(int inventoryId, int amount);
-        Task AddQuantity(int inventoryId, int amount);
-        Task SubtractQuantity(int inventoryId, int amount);
+        Task SetQuantity(int SKU, int inventoryId, int amount);
+        Task AddQuantity(int SKU, int inventoryId, int amount);
+        Task SubtractQuantity(int SKU, int inventoryId, int amount);
     }
 }
