@@ -30,12 +30,12 @@ namespace server.controllers
         }
 
         [HttpPost]
-        [Route("{inventoryId}")]
-        public async Task<IActionResult> AddQuantity([FromBody]int SKU, int inventoryId, [FromBody]int amount)
+        [Route("{SKU}/add/{amount}")]
+        public async Task<IActionResult> AddQuantity(int SKU, int amount)
         {
             try
             {
-                await _inventoryService.AddQuantity(SKU, inventoryId, amount);
+                await _inventoryService.AddQuantity(SKU, amount);
                 return Ok();
             }
             catch (Exception e)
@@ -59,12 +59,12 @@ namespace server.controllers
         }
 
         [HttpPost]
-        [Route("{inventoryId}")]
-        public async Task<IActionResult> SetQuantity([FromBody]int SKU, int inventoryId, [FromBody]int amount)
+        [Route("{SKU}/set/{amount}")]
+        public async Task<IActionResult> SetQuantity(int SKU, int amount)
         {
             try
             {
-                await _inventoryService.SetQuantity(SKU, inventoryId, amount);
+                await _inventoryService.SetQuantity(SKU, amount);
                 return Ok();
             }
             catch (Exception e)
@@ -74,11 +74,11 @@ namespace server.controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> GetQuantity([FromBody]int SKU, int inventoryId)
+        public async Task<IActionResult> GetQuantity([FromBody]int SKU)
         {
             try
             {
-                return Ok(await _inventoryService.GetQuantity(SKU, inventoryId));
+                return Ok(await _inventoryService.GetQuantity(SKU));
             }
             catch (Exception e)
             {
@@ -87,12 +87,12 @@ namespace server.controllers
         }
 
         [HttpPost]
-        [Route("{inventoryId}")]
-        public async Task<IActionResult> SubtractQuantity([FromBody]int SKU, int inventoryId, [FromBody]int amount)
+        [Route("{SKU}/sbt/{amount}")]
+        public async Task<IActionResult> SubtractQuantity(int SKU, int amount)
         {
             try
             {
-                await _inventoryService.SubtractQuantity(SKU, inventoryId, amount);
+                await _inventoryService.SubtractQuantity(SKU, amount);
                 return Ok();
             }
             catch (Exception e)
