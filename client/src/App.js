@@ -1,38 +1,30 @@
 import React from "react";
 import "./App.css";
-import { MyCoolComponent } from "./MyCoolComponent";
+import { withStyles } from "@material-ui/styles";
+import { Paper } from "@material-ui/core";
+import { SearchBar } from "./SeachBar";
+import { PersistentDrawerLeft } from "./NavDrawer";
+import { InventoryTablesContainer } from "./InventoryTableContainer";
 
-const App = () => {
+const AppComp = ({ classes }) => {
   return (
-    <div className="App">
-      <div className="header">React TODO application</div>
-      <div className="btn">+ </div>
-
-      <MyCoolComponent
-        title="Cool Stuff"
-        description="Suff the coo' kids do:"
-        list={[
-          "program",
-          "swim",
-          "play games",
-          "be awesome",
-          "go to conie island"
-        ]}
-      />
-      <MyCoolComponent
-        title="Lame Stuff"
-        description="Suff the lame kids do:"
-        list={[
-          "shovel poop",
-          "flip burgers at mac daddys",
-          "pick thier nose",
-          "be lame"
-        ]}
-      />
-
-      <input></input>
-    </div>
+    <React.Fragment>
+      <PersistentDrawerLeft />
+      <Paper className={classes.paperSearch}>
+        <div className="App">
+          <SearchBar />
+        </div>
+      </Paper>
+      <InventoryTablesContainer />
+    </React.Fragment>
   );
 };
 
-export default App;
+const styles = theme => ({
+  paperSearch: {
+    margin: "auto",
+    width: "90%"
+  }
+});
+
+export const App = withStyles(styles)(AppComp);
