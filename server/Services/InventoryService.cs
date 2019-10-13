@@ -19,7 +19,7 @@ namespace server.Services
             await _iInventoryRepository.CreateInventory(new Inventory(inventory));
         }
 
-        public async Task AddQuantity(int SKU, int amount)
+        public async Task AddQuantity(double SKU, int amount)
         {
             await _iInventoryRepository.AddQuantity(SKU, amount);
         }
@@ -29,17 +29,17 @@ namespace server.Services
             return await _iInventoryRepository.GetDateLastUpdated(inventoryId);
         }
 
-        public async Task SetQuantity(int SKU, int amount)
+        public async Task SetQuantity(double SKU, int amount)
         {
             await _iInventoryRepository.SetQuantity(SKU, amount);
         }
 
-        public async Task<int> GetQuantity(int SKU)
+        public async Task<double> GetQuantity(double SKU)
         {
             return await _iInventoryRepository.GetQuantityBySKU(SKU);
         }
 
-        public async Task SubtractQuantity(int SKU, int amount)
+        public async Task SubtractQuantity(double SKU, int amount)
         {
             await _iInventoryRepository.SubtractQuantity(SKU, amount);
         }

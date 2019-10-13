@@ -2,9 +2,9 @@ import React from "react";
 import "./App.css";
 import { withStyles } from "@material-ui/styles";
 import { Paper } from "@material-ui/core";
-import { SearchBar } from "./SeachBar";
-import { PersistentDrawerLeft } from "./NavDrawer";
-import { InventoryTablesContainer } from "./InventoryTableContainer";
+import { SearchBar } from "./Area/SeachBar";
+import { PersistentDrawerLeft } from "./Area/NavDrawer";
+import { InventoryTablesContainer } from "./Area/InventoryTableContainer";
 
 const AppComp = ({ classes }) => {
   return (

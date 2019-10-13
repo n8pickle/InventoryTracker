@@ -14,6 +14,7 @@ import ChevronLeftIcon from "@material-ui/icons/ChevronLeft";
 import ChevronRightIcon from "@material-ui/icons/ChevronRight";
 import ListItem from "@material-ui/core/ListItem";
 import ListItemText from "@material-ui/core/ListItemText";
+import { Redirect } from "react-router";
 
 const drawerWidth = 240;
 
@@ -60,6 +61,7 @@ const styles = theme => ({
     ...theme.mixins.toolbar,
     justifyContent: "flex-end"
   },
+  listItem: {},
   content: {
     flexGrow: 1,
     padding: theme.spacing(3),
@@ -83,6 +85,8 @@ const styles = theme => ({
 
 const PersistentDrawerLeftComp = ({ classes }) => {
   const [open, setOpen] = React.useState(false);
+  const [navToNewProduct, setNavToNewProduct] = React.useState(false);
+  const [navToHomePage, setNavToHomePage] = React.useState(false);
 
   function handleDrawerOpen() {
     setOpen(true);
@@ -136,12 +140,29 @@ const PersistentDrawerLeftComp = ({ classes }) => {
         </div>
         <Divider />
         <List>
-          {["Home", "New Product"].map((text, index) => (
-            <ListItem button key={text}>
-              {/* <ListItemIcon>
-                {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
-              </ListItemIcon> */}
-              <ListItemText primary={text} />
+          {[
+            {
+              label: "Home",
+              path: "/",
+              id: 1,
+              setState: setNavToHomePage,
+              nav: navToHomePage
+            },
+            {
+              label: "New Product",
+              path: "/new-product",
+              id: 2,
+              setState: setNavToNewProduct,
+              nav: navToNewProduct
+            }
+          ].map((button, index) => (
+            <ListItem
+              button
+              key={button.label}
+              onClick={() => button.setState(true)}
+            >
+              {button.nav && <Redirect to={button.path} />}
+              <ListItemText primary={button.label}></ListItemText>
             </ListItem>
           ))}
         </List>

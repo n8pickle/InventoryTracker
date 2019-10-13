@@ -8,8 +8,8 @@ namespace server.Repositories
     {
         Task CreateProduct(Product product);
         Task<List<Product>> GetProducts();
-        Task<Product> GetProduct(int SKU);
-        Task UpdateProduct(int SKU, Product product);
-        Task DeleteProduct(int SKU);
+        Task<Product> GetProduct(double SKU);
+        Task UpdateProduct(double SKU, Product product);
+        Task DeleteProduct(double SKU);
     }
 }

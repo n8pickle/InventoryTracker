@@ -31,7 +31,7 @@ namespace server.controllers
 
         [HttpPost]
         [Route("{SKU}/add/{amount}")]
-        public async Task<IActionResult> AddQuantity(int SKU, int amount)
+        public async Task<IActionResult> AddQuantity(double SKU, int amount)
         {
             try
             {
@@ -60,7 +60,7 @@ namespace server.controllers
 
         [HttpPost]
         [Route("{SKU}/set/{amount}")]
-        public async Task<IActionResult> SetQuantity(int SKU, int amount)
+        public async Task<IActionResult> SetQuantity(double SKU, int amount)
         {
             try
             {
@@ -74,7 +74,7 @@ namespace server.controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> GetQuantity([FromBody]int SKU)
+        public async Task<IActionResult> GetQuantity([FromBody]double SKU)
         {
             try
             {
@@ -88,7 +88,7 @@ namespace server.controllers
 
         [HttpPost]
         [Route("{SKU}/sbt/{amount}")]
-        public async Task<IActionResult> SubtractQuantity(int SKU, int amount)
+        public async Task<IActionResult> SubtractQuantity(double SKU, int amount)
         {
             try
             {

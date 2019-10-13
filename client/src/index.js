@@ -1,11 +1,15 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import "./index.css";
+import { EditProduct } from "./EditProduct";
+import { NewProduct } from "./NewProduct";
 import { App } from "./App";
 import * as serviceWorker from "./serviceWorker";
 import { createMuiTheme } from "@material-ui/core/styles";
 import { MuiThemeProvider } from "@material-ui/core";
 import { Background } from "./Background";
+import { Router, Switch, Route } from "react-router";
+import { createBrowserHistory } from "history";
 
 const darkTheme = createMuiTheme({
   palette: {
@@ -13,10 +17,34 @@ const darkTheme = createMuiTheme({
   }
 });
 
+const routes = [
+  { path: "/", name: "HomePage", component: App, id: 1 },
+  {
+    path: "/new-product",
+    name: "NewProductPage",
+    component: NewProduct,
+    id: 2
+  },
+  {
+    path: "/edit-product",
+    name: "EditProductPage",
+    component: EditProduct,
+    id: 3
+  }
+];
+
+var history = createBrowserHistory();
+
 ReactDOM.render(
   <MuiThemeProvider theme={darkTheme}>
     <Background>
-      <App />
+      <Router history={history}>
+        <Switch>
+          {routes.map(r => (
+            <Route exact path={r.path} component={r.component} key={r.id} />
+          ))}
+        </Switch>
+      </Router>
     </Background>
   </MuiThemeProvider>,
   document.getElementById("root")

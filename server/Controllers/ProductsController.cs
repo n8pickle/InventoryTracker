@@ -46,7 +46,7 @@ namespace server.controllers
 
         [HttpGet]
         [Route("{SKU}")]
-        public async Task<IActionResult> GetProduct(int SKU)
+        public async Task<IActionResult> GetProduct(double SKU)
         {
             try
             {
@@ -60,7 +60,7 @@ namespace server.controllers
 
         [HttpPut]
         [Route("{SKU}")]
-        public async Task<IActionResult> UpdateProduct(int SKU, [FromBody]ProductTO product)
+        public async Task<IActionResult> UpdateProduct(double SKU, [FromBody]ProductTO product)
         {
             try
             {
@@ -75,7 +75,7 @@ namespace server.controllers
 
         [HttpDelete]
         [Route("{SKU}")]
-        public async Task<IActionResult> DeleteProduct(int SKU)
+        public async Task<IActionResult> DeleteProduct(double SKU)
         {
             try
             {

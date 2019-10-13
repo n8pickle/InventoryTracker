@@ -9,9 +9,9 @@ namespace server.Services
     {
         Task CreateProduct(ProductTO product);
         Task<List<ProductTO>> GetProducts();
-        Task<ProductTO> GetProduct(int SKU);
-        Task UpdateProduct(int SKU, ProductTO product);
-        Task DeleteProduct(int SKU);
+        Task<ProductTO> GetProduct(double SKU);
+        Task UpdateProduct(double SKU, ProductTO product);
+        Task DeleteProduct(double SKU);
 
     }
 }

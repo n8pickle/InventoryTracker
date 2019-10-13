@@ -24,12 +24,12 @@ namespace server.Services
             await _inventoryRepository.CreateInventory(new Inventory(p, product.Quantity, DateTime.Now));
         }
 
-        public async Task DeleteProduct(int SKU)
+        public async Task DeleteProduct(double SKU)
         {
             await _productsRepository.DeleteProduct(SKU);
         }
 
-        public async Task<ProductTO> GetProduct(int SKU)
+        public async Task<ProductTO> GetProduct(double SKU)
         {
             ProductTO product = new ProductTO(await _productsRepository.GetProduct(SKU));
             product.Quantity = await _inventoryRepository.GetQuantityByProductId(product.ProductID);
@@ -51,7 +51,7 @@ namespace server.Services
             return products;
         }
 
-        public async Task UpdateProduct(int SKU, ProductTO product)
+        public async Task UpdateProduct(double SKU, ProductTO product)
         {
             await _productsRepository.UpdateProduct(SKU, new Product(product));
             await _inventoryRepository.AddQuantity(SKU, product.Quantity);

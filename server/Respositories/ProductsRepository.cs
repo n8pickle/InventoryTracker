@@ -20,7 +20,7 @@ namespace server.Repositories
             await _mySqlDbContext.SaveChangesAsync();
         }
 
-        public async Task<Product> GetProduct(int SKU)
+        public async Task<Product> GetProduct(double SKU)
         {
             return await _mySqlDbContext.Product.Where(p => p.SKU == SKU && p.Deleted != 1).FirstOrDefaultAsync();
         }
@@ -30,14 +30,14 @@ namespace server.Repositories
             return await _mySqlDbContext.Product.ToListAsync();
         }
 
-        public async Task DeleteProduct(int SKU)
+        public async Task DeleteProduct(double SKU)
         {
             var result = await _mySqlDbContext.Product.Where(p => p.SKU == SKU && p.Deleted != 1).FirstOrDefaultAsync();
             result.Deleted = 1;
             await _mySqlDbContext.SaveChangesAsync();
         }
 
-        public async Task UpdateProduct(int SKU, Product product)
+        public async Task UpdateProduct(double SKU, Product product)
         {
             var result = await _mySqlDbContext.Product.Where(p => p.SKU == SKU).FirstOrDefaultAsync();
             result.SKU = product.SKU;
