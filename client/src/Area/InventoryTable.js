@@ -16,7 +16,6 @@ const InventoryTableComp = ({ tables, error, classes }) => {
   const [navToEditProduct, setNavToEditProduct] = React.useState(undefined);
 
   if (navToEditProduct) {
-    console.log(navToEditProduct);
     return (
       <Redirect
         to={{ pathname: "/edit-product", state: { navToEditProduct } }}
@@ -46,7 +45,7 @@ const InventoryTableComp = ({ tables, error, classes }) => {
             {tables.map(row => (
               <TableRow
                 className={
-                  row.quantity <= row.notificationQuantity
+                  row.quantity > row.notificationQuantity
                     ? classes.tRow
                     : classes.bg
                 }

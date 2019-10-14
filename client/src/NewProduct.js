@@ -4,6 +4,7 @@ import { withStyles } from "@material-ui/core/styles";
 import TextField from "@material-ui/core/TextField";
 import { PersistentDrawerLeft } from "./Area/NavDrawer";
 import { Card, Button } from "@material-ui/core";
+import { Redirect } from "react-router";
 import axios from "axios";
 
 const NewProductPageComp = ({ classes }) => {
@@ -20,6 +21,23 @@ const NewProductPageComp = ({ classes }) => {
     Deleted: 0,
     ProductID: 0
   });
+  const [formSubmitted, SetFormSubmitted] = React.useState(false);
+
+  const onSubmitHandler = async () => {
+    await axios
+      .post("http://localhost:5000/api/products/", newProductForm)
+      .then(function(response) {
+        console.log(response);
+      })
+      .catch(function(error) {
+        // setError(true);
+        console.log(error);
+      });
+    SetFormSubmitted(true);
+  };
+
+  if (formSubmitted) return <Redirect to="/"></Redirect>;
+
   return (
     <React.Fragment>
       <PersistentDrawerLeft />
@@ -135,18 +153,7 @@ const NewProductPageComp = ({ classes }) => {
           variant="contained"
           color="primary"
           className={classes.submit}
-          onClick={() => {
-            // const [error, setError] = useState(undefined);
-            axios
-              .post("http://localhost:5000/api/products/", newProductForm)
-              .then(function(response) {
-                console.log(response);
-              })
-              .catch(function(error) {
-                // setError(true);
-                console.log(error);
-              });
-          }}
+          onClick={e => onSubmitHandler()}
         >
           Submit
         </Button>

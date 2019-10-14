@@ -4,6 +4,7 @@ import { withStyles } from "@material-ui/core/styles";
 import TextField from "@material-ui/core/TextField";
 import { PersistentDrawerLeft } from "./Area/NavDrawer";
 import { Card, Button } from "@material-ui/core";
+import DeleteIcon from "@material-ui/icons/Delete";
 import { Redirect } from "react-router";
 import axios from "axios";
 
@@ -21,6 +22,48 @@ const EditProductPageComp = ({ classes, location }) => {
     Deleted: 0,
     ProductID: 0
   });
+  const [itemDeleted, setItemDeleted] = React.useState(false);
+  const [itemSubmitted, setItemSubmitted] = React.useState(false);
+  const [editCanceled, setEditCanceled] = React.useState(false);
+
+  const onSubmitHandler = async () => {
+    await axios
+      .put(
+        "http://localhost:5000/api/products/" +
+          location.state.navToEditProduct.sku,
+        editProductForm
+      )
+      .then(function(response) {
+        console.log(response);
+      })
+      .catch(function(error) {
+        console.log(error);
+      });
+    setItemSubmitted(true);
+  };
+
+  const onDeleteHandler = async () => {
+    await axios
+      .delete(
+        "http://localhost:5000/api/products/" +
+          location.state.navToEditProduct.sku
+      )
+      .then(function(response) {
+        console.log(response);
+      })
+      .catch(function(error) {
+        // setError(true);
+        console.log(error);
+      });
+    setItemDeleted(true);
+  };
+
+  if (itemDeleted) return <Redirect to="/"></Redirect>;
+
+  if (itemSubmitted) return <Redirect to="/"></Redirect>;
+
+  if (editCanceled) return <Redirect to="/"></Redirect>;
+
   return (
     <React.Fragment>
       <PersistentDrawerLeft />
@@ -136,44 +179,26 @@ const EditProductPageComp = ({ classes, location }) => {
           variant="contained"
           color="primary"
           className={classes.allButtons}
-          onClick={() => {
-            // const [error, setError] = useState(undefined);
-            axios
-              .put(
-                "http://localhost:5000/api/products/" +
-                  location.state.navToEditProduct.sku,
-                editProductForm
-              )
-              .then(function(response) {
-                console.log(response);
-              })
-              .catch(function(error) {
-                // setError(true);
-                console.log(error);
-              });
-          }}
+          onClick={e => onSubmitHandler()}
         >
           Submit
         </Button>
         <Button
           variant="contained"
+          color="primary"
+          className={classes.allButtons}
+          onClick={e => setEditCanceled(true)}
+        >
+          Cancel
+        </Button>
+        <Button
+          variant="contained"
           color="secondary"
           className={classes.allButtons}
-          onClick={() => {
-            axios
-              .delete(
-                "http://localhost:5000/api/products/" +
-                  location.state.navToEditProduct.sku
-              )
-              .then(function(response) {
-                console.log(response);
-              })
-              .catch(function(error) {
-                // setError(true);
-                console.log(error);
-              });
-          }}
-        ></Button>
+          onClick={e => onDeleteHandler()}
+        >
+          <DeleteIcon />
+        </Button>
       </Card>
     </React.Fragment>
   );
@@ -202,7 +227,7 @@ const styles = theme => ({
     transform: "translateX(-50%) translateY(-50%)"
   },
   allButtons: {
-    marginLeft: "22%",
+    marginLeft: "15%",
     marginTop: theme.spacing(4)
   }
 });
