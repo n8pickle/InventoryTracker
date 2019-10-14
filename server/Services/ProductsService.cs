@@ -54,7 +54,7 @@ namespace server.Services
         public async Task UpdateProduct(double SKU, ProductTO product)
         {
             await _productsRepository.UpdateProduct(SKU, new Product(product));
-            await _inventoryRepository.AddQuantity(SKU, product.Quantity);
+            await _inventoryRepository.SetQuantity(SKU, product.Quantity);
         }
     }
 }

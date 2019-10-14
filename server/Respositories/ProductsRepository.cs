@@ -41,7 +41,6 @@ namespace server.Repositories
         {
             var result = await _mySqlDbContext.Product.Where(p => p.SKU == SKU).FirstOrDefaultAsync();
             result.SKU = product.SKU;
-            result.ProductID = product.ProductID;
             result.Price = product.Price;
             result.NotificationQuantity = product.NotificationQuantity;
             result.ProductName = product.ProductName;

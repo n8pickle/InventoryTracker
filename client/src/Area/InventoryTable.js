@@ -117,6 +117,9 @@ const styles = theme => ({
     "&:nth-of-type(odd)": {
       backgroundColor: "#2f2f2f"
     }
+  },
+  bg: {
+    backgroundColor: "#ff0000"
   }
 });
 

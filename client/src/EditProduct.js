@@ -4,6 +4,7 @@ import { withStyles } from "@material-ui/core/styles";
 import TextField from "@material-ui/core/TextField";
 import { PersistentDrawerLeft } from "./Area/NavDrawer";
 import { Card, Button } from "@material-ui/core";
+import { Redirect } from "react-router";
 import axios from "axios";
 
 const EditProductPageComp = ({ classes, location }) => {
@@ -134,11 +135,15 @@ const EditProductPageComp = ({ classes, location }) => {
         <Button
           variant="contained"
           color="primary"
-          className={classes.submit}
+          className={classes.allButtons}
           onClick={() => {
             // const [error, setError] = useState(undefined);
             axios
-              .put("http://localhost:5000/api/products/{SKU}", editProductForm)
+              .put(
+                "http://localhost:5000/api/products/" +
+                  location.state.navToEditProduct.sku,
+                editProductForm
+              )
               .then(function(response) {
                 console.log(response);
               })
@@ -150,6 +155,25 @@ const EditProductPageComp = ({ classes, location }) => {
         >
           Submit
         </Button>
+        <Button
+          variant="contained"
+          color="secondary"
+          className={classes.allButtons}
+          onClick={() => {
+            axios
+              .delete(
+                "http://localhost:5000/api/products/" +
+                  location.state.navToEditProduct.sku
+              )
+              .then(function(response) {
+                console.log(response);
+              })
+              .catch(function(error) {
+                // setError(true);
+                console.log(error);
+              });
+          }}
+        ></Button>
       </Card>
     </React.Fragment>
   );
@@ -177,8 +201,8 @@ const styles = theme => ({
     position: "absolute",
     transform: "translateX(-50%) translateY(-50%)"
   },
-  submit: {
-    marginLeft: "44%",
+  allButtons: {
+    marginLeft: "22%",
     marginTop: theme.spacing(4)
   }
 });
