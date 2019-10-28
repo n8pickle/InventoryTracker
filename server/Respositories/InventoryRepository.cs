@@ -57,7 +57,10 @@ namespace server.Repositories
         {
             var product = await _mySqlDbContext.Product.Where(p => p.SKU == SKU).FirstOrDefaultAsync();
             var result = await _mySqlDbContext.Inventory.Where(i => i.InventoryID == product.ProductID).FirstOrDefaultAsync();
-            result.Quantity -= amount;
+            if (result.Quantity > 0)
+            {
+                result.Quantity -= amount;
+            }
             await _mySqlDbContext.SaveChangesAsync();
         }
     }

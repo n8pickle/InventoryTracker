@@ -22,6 +22,11 @@ const NewProductPageComp = ({ classes }) => {
     ProductID: 0
   });
   const [formSubmitted, SetFormSubmitted] = React.useState(false);
+  const [formCanceled, setFormCanceled] = React.useState(false);
+
+  const inputProps = {
+    maxLength: 12
+  };
 
   const onSubmitHandler = async () => {
     await axios
@@ -37,6 +42,7 @@ const NewProductPageComp = ({ classes }) => {
   };
 
   if (formSubmitted) return <Redirect to="/"></Redirect>;
+  if (formCanceled) return <Redirect to="/"></Redirect>;
 
   return (
     <React.Fragment>
@@ -90,8 +96,8 @@ const NewProductPageComp = ({ classes }) => {
         <TextField
           id="outlined-dense"
           label="SKU"
-          type="number"
           fullWidth
+          inputProps={inputProps}
           value={newProductForm.SKU}
           onChange={e =>
             setNewProductForm({
@@ -157,6 +163,14 @@ const NewProductPageComp = ({ classes }) => {
         >
           Submit
         </Button>
+        <Button
+          variant="contained"
+          color="primary"
+          className={classes.submit}
+          onClick={e => setFormCanceled(true)}
+        >
+          Cancel
+        </Button>
       </Card>
     </React.Fragment>
   );
@@ -186,7 +200,7 @@ const styles = theme => ({
     transform: "translateX(-50%) translateY(-50%)"
   },
   submit: {
-    marginLeft: "44%",
+    marginLeft: "25%",
     marginTop: theme.spacing(4)
   }
 });

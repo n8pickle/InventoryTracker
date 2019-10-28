@@ -3,6 +3,7 @@ import clsx from "clsx";
 import { withStyles } from "@material-ui/core/styles";
 import TextField from "@material-ui/core/TextField";
 import { PersistentDrawerLeft } from "./Area/NavDrawer";
+import { ConfirmationBox } from "./Area/ConfirmationBox";
 import { Card, Button } from "@material-ui/core";
 import DeleteIcon from "@material-ui/icons/Delete";
 import { Redirect } from "react-router";
@@ -25,6 +26,7 @@ const EditProductPageComp = ({ classes, location }) => {
   const [itemDeleted, setItemDeleted] = React.useState(false);
   const [itemSubmitted, setItemSubmitted] = React.useState(false);
   const [editCanceled, setEditCanceled] = React.useState(false);
+  const [open, setOpen] = React.useState(false);
 
   const onSubmitHandler = async () => {
     await axios
@@ -65,7 +67,7 @@ const EditProductPageComp = ({ classes, location }) => {
   if (editCanceled) return <Redirect to="/"></Redirect>;
 
   return (
-    <React.Fragment>
+    <form>
       <PersistentDrawerLeft />
       <Card className={classes.center}>
         <TextField
@@ -179,7 +181,11 @@ const EditProductPageComp = ({ classes, location }) => {
           variant="contained"
           color="primary"
           className={classes.allButtons}
-          onClick={e => onSubmitHandler()}
+          onClick={e => {
+            e.preventDefault();
+            onSubmitHandler();
+          }}
+          type="submit"
         >
           Submit
         </Button>
@@ -195,12 +201,17 @@ const EditProductPageComp = ({ classes, location }) => {
           variant="contained"
           color="secondary"
           className={classes.allButtons}
-          onClick={e => onDeleteHandler()}
+          onClick={e => setOpen(true)}
         >
           <DeleteIcon />
         </Button>
       </Card>
-    </React.Fragment>
+      <ConfirmationBox
+        open={open}
+        setOpen={setOpen}
+        onDeleteHandler={onDeleteHandler}
+      ></ConfirmationBox>
+    </form>
   );
 };
 const styles = theme => ({

@@ -18,5 +18,12 @@ export const InventoryTablesContainer = () => {
       });
   }, []);
 
-  return <InventoryTable tables={tables} error={error} />;
+  return (
+    <InventoryTable
+      tables={tables}
+      setTables={setTables}
+      setError={setError}
+      error={error}
+    />
+  );
 };

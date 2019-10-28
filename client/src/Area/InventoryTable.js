@@ -10,10 +10,83 @@ import Fab from "@material-ui/core/Fab";
 import AddIcon from "@material-ui/icons/Add";
 import EditIcon from "@material-ui/icons/Edit";
 import SubtractIcon from "@material-ui/icons/Remove";
+import axios from "axios";
 import { Redirect } from "react-router";
+import { EditableTypography } from "../.vscode/EditableTypography";
 
-const InventoryTableComp = ({ tables, error, classes }) => {
+const InventoryTableComp = ({
+  tables,
+  error,
+  classes,
+  setTables,
+  setError
+}) => {
   const [navToEditProduct, setNavToEditProduct] = React.useState(undefined);
+  const [incrementProduct, setIncrementProduct] = React.useState(undefined);
+
+  const onSubmit = async (sku, amount) => {
+    await axios
+      .post("http://localhost:5000/api/inventory/" + sku + "/set/" + amount)
+      .then(function(response) {
+        console.log(response);
+      })
+      .catch(function(error) {
+        console.log(error);
+      });
+    await axios
+      .get("http://localhost:5000/api/products")
+      .then(function(response) {
+        setTables(response.data);
+        console.log(response);
+      })
+      .catch(function(error) {
+        setError(true);
+        console.log(error);
+      });
+  };
+
+  const onDecrement = async sku => {
+    console.log(sku);
+    await axios
+      .post("http://localhost:5000/api/inventory/" + sku + "/sbt/" + 1)
+      .then(function(response) {
+        console.log(response);
+      })
+      .catch(function(error) {
+        console.log(error);
+      });
+    await axios
+      .get("http://localhost:5000/api/products")
+      .then(function(response) {
+        setTables(response.data);
+        console.log(response);
+      })
+      .catch(function(error) {
+        setError(true);
+        console.log(error);
+      });
+  };
+
+  const onIncrement = async sku => {
+    await axios
+      .post("http://localhost:5000/api/inventory/" + sku + "/add/" + 1)
+      .then(function(response) {
+        console.log(response);
+      })
+      .catch(function(error) {
+        console.log(error);
+      });
+    await axios
+      .get("http://localhost:5000/api/products")
+      .then(function(response) {
+        setTables(response.data);
+        console.log(response);
+      })
+      .catch(function(error) {
+        setError(true);
+        console.log(error);
+      });
+  };
 
   if (navToEditProduct) {
     return (
@@ -49,7 +122,7 @@ const InventoryTableComp = ({ tables, error, classes }) => {
                     ? classes.tRow
                     : classes.bg
                 }
-                key={tables.name}
+                key={row.sku}
               >
                 <TableCell component="th" scope="row">
                   <Fab
@@ -66,17 +139,28 @@ const InventoryTableComp = ({ tables, error, classes }) => {
                 <TableCell align="right">{row.trimColor}</TableCell>
                 <TableCell align="right">{row.sku}</TableCell>
                 <TableCell align="right">{row.size}</TableCell>
-                <TableCell align="right">{row.quantity}</TableCell>
-                <TableCell align="right">
-                  <Fab color="primary" aria-label="add" className={classes.fab}>
+                <TableCell align="right" width="10%" marginRight="0%">
+                  <EditableTypography
+                    value={row.quantity}
+                    onBlur={e => onSubmit(row.sku, e.target.value)}
+                  ></EditableTypography>
+                </TableCell>
+                <TableCell align="center">
+                  <Fab
+                    color="primary"
+                    aria-label="add"
+                    className={classes.fab}
+                    onClick={() => onIncrement(row.sku)}
+                  >
                     <AddIcon />
                   </Fab>
                 </TableCell>
-                <TableCell align="right">
+                <TableCell align="center">
                   <Fab
                     color="primary"
                     aria-label="delete"
                     className={classes.fab}
+                    onClick={e => onDecrement(row.sku)}
                   >
                     <SubtractIcon />
                   </Fab>
@@ -119,6 +203,11 @@ const styles = theme => ({
   },
   bg: {
     backgroundColor: "#ff0000"
+  },
+  quantityBase: {
+    textAlign: "right",
+    width: "50%",
+    margin: "auto"
   }
 });
 
