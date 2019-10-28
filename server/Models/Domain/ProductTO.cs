@@ -32,7 +32,7 @@ namespace server.Models
         public string Size { get; set; }
         public double Price { get; set; }
         public string Dimensions { get; set; }
-        public int SKU { get; set; }
+        public double SKU { get; set; }
         public int Deleted { get; set; }
     }
 }
